@@ -1,0 +1,196 @@
+{
+  "summary": {
+    "total_cases": 1,
+    "scored_cases": 1,
+    "unscored_cases": 0,
+    "score_0_100": 100.0,
+    "partial_mean_0_100": null
+  },
+  "config": {
+    "provider": "openrouter",
+    "model": "google/gemini-2.5-flash",
+    "judge_provider": "openrouter",
+    "judge_model": "google/gemini-2.5-flash",
+    "max_steps": 8,
+    "dataset": "core"
+  },
+  "cases": [
+    {
+      "id": "E1",
+      "question": "GitHub Actions hiện có sự cố không? Hãy xem cả incident gần đây và dẫn nguồn.",
+      "expected": "Tại thời điểm snapshot GitHub overall none; incident Actions 05/11 resolved. Không nói sự cố cũ đang diễn ra.",
+      "scenario": "normal",
+      "provider": "openrouter",
+      "model": "google/gemini-2.5-flash",
+      "judge_provider": "openrouter",
+      "judge_model": "google/gemini-2.5-flash",
+      "result": {
+        "status": "completed",
+        "answer": "Theo https://www.githubstatus.com (cập nhật lúc 03:50:47 ngày 09/11/2026 UTC), trạng thái của GitHub Actions hiện tại là \"operational\" (hoạt động bình thường).\n\nTuy nhiên, có một số incident gần đây đã được giải quyết liên quan đến GitHub Actions:\n\n*   **pfbmpxxfq1cy**: Hiệu suất giảm sút đối với nhiều dịch vụ GitHub, đã được giải quyết vào 00:20:49 ngày 06/11/2026 UTC.\n*   **t89g2q1800fr**: Sự cố với Actions, đã được giải quyết vào 17:42:35 ngày 05/11/2026 UTC.\n*   **h02n9572mx9y**: Sự cố với Actions, đã được giải quyết vào 01:10:18 ngày 07/11/2026 UTC.\n*   **xr3myzj7ms51**: Sự cố với Actions và Pages, đã được giải quyết vào 01:04:38 ngày 07/11/2026 UTC.\n\nXin lưu ý rằng các incident này đã được giải quyết và hệ thống hiện đang hoạt động bình thường.",
+        "trace": [
+          {
+            "event": "model",
+            "step": 1,
+            "finish": "tool_calls",
+            "tool_calls": 1
+          },
+          {
+            "event": "tool",
+            "step": 1,
+            "name": "get_status",
+            "arguments": {
+              "component": "Actions",
+              "provider": "github"
+            },
+            "result": {
+              "provider": "github",
+              "captured_at": "2026-11-09T03:50:47.065020+00:00",
+              "overall": {
+                "indicator": "none",
+                "description": "All Systems Operational"
+              },
+              "components": [
+                {
+                  "name": "Actions",
+                  "status": "operational"
+                }
+              ],
+              "incidents": [
+                {
+                  "id": "pfbmpxxfq1cy",
+                  "name": "Degraded performance for multiple GitHub services",
+                  "status": "resolved",
+                  "updated_at": "2026-11-06T00:20:49.369Z"
+                },
+                {
+                  "id": "t89g2q1800fr",
+                  "name": "Incident with Actions",
+                  "status": "resolved",
+                  "updated_at": "2026-11-05T17:42:35.455Z"
+                },
+                {
+                  "id": "h02n9572mx9y",
+                  "name": "Incident with Actions",
+                  "status": "resolved",
+                  "updated_at": "2026-11-07T01:10:18.506Z"
+                },
+                {
+                  "id": "xr3myzj7ms51",
+                  "name": "Incident with Actions and Pages",
+                  "status": "resolved",
+                  "updated_at": "2026-11-07T01:04:38.647Z"
+                },
+                {
+                  "id": "smtdswd1h2w4",
+                  "name": "Incident with Pull Requests, Git Operations and Issues",
+                  "status": "resolved",
+                  "updated_at": "2026-11-04T11:50:06.459Z"
+                }
+              ],
+              "matching_incidents_in_last_50": 23,
+              "note": "Chỉ tìm theo chuỗi trong 50 incident gần nhất; không tìm thấy không chứng minh không có sự cố.",
+              "source": "https://www.githubstatus.com"
+            }
+          },
+          {
+            "event": "model",
+            "step": 2,
+            "finish": "stop",
+            "tool_calls": 0
+          }
+        ],
+        "usage": [
+          {
+            "prompt_tokens": 872,
+            "completion_tokens": 20,
+            "total_tokens": 892,
+            "cost": 0.0003116,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0003116,
+              "upstream_inference_prompt_cost": 0.0002616,
+              "upstream_inference_completions_cost": 5e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 1351,
+            "completion_tokens": 297,
+            "total_tokens": 1648,
+            "cost": 0.0009372,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 780,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0009372,
+              "upstream_inference_prompt_cost": 0.0001947,
+              "upstream_inference_completions_cost": 0.0007425
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        ]
+      },
+      "grade": {
+        "score": 100,
+        "raw_judge_score": 100,
+        "dimensions": {
+          "factuality": 40,
+          "completeness": 25,
+          "evidence": 20,
+          "boundaries": 15
+        },
+        "status": "scored",
+        "reason": "Agent đã cung cấp thông tin chính xác về trạng thái hiện tại của GitHub Actions và liệt kê các incident gần đây đã được giải quyết, bao gồm cả incident ngày 05/11. Câu trả lời cũng dẫn nguồn rõ ràng và không khẳng định quá mức.",
+        "improvement": "Không cần cải thiện.",
+        "mechanical": {
+          "violations": [],
+          "score_cap": 100,
+          "tool_calls": 1,
+          "tool_steps": 1
+        },
+        "judge_usage": {
+          "prompt_tokens": 1279,
+          "completion_tokens": 112,
+          "total_tokens": 1391,
+          "cost": 0.0006637,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0006637,
+            "upstream_inference_prompt_cost": 0.0003837,
+            "upstream_inference_completions_cost": 0.00028
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "judge_trace_truncated": false
+      }
+    }
+  ]
+}
